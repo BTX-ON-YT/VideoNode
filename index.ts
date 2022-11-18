@@ -23,6 +23,27 @@ app.get('/api/search', async (req: any, res: any) => {
     }
 });
 
+app.get('/api/searchOne', async (req: any, res: any) => {
+    const query = req.query.query;
+    if (query) {
+        try {
+            const results = await yt.search(query);
+            res.json({
+                count: results.length,
+                result: results[0],
+                result2: results[1],
+                result3: results[2],
+            });
+        } catch (e) {
+            res.status(500).json({
+                error: e,
+            });
+        }
+    } else {
+        res.status(400).send('Bad Request');
+    }
+});
+
 app.get('/api/videoInfo', async (req: any, res: any) => {
     const query = req.query.query;
     if (query) {

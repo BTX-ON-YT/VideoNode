@@ -98,8 +98,42 @@ app.get('/api/search', function (req, res) { return __awaiter(void 0, void 0, vo
         }
     });
 }); });
+app.get('/api/searchOne', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var query, results, e_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                query = req.query.query;
+                if (!query) return [3 /*break*/, 5];
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, yt.search(query)];
+            case 2:
+                results = _a.sent();
+                res.json({
+                    count: results.length,
+                    result: results[0],
+                    result2: results[1],
+                    result3: results[2]
+                });
+                return [3 /*break*/, 4];
+            case 3:
+                e_2 = _a.sent();
+                res.status(500).json({
+                    error: e_2
+                });
+                return [3 /*break*/, 4];
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                res.status(400).send('Bad Request');
+                _a.label = 6;
+            case 6: return [2 /*return*/];
+        }
+    });
+}); });
 app.get('/api/videoInfo', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var query, results, videoInfo, _i, results_1, result, e_2;
+    var query, results, videoInfo, _i, results_1, result, e_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -131,9 +165,9 @@ app.get('/api/videoInfo', function (req, res) { return __awaiter(void 0, void 0,
                 }
                 return [3 /*break*/, 4];
             case 3:
-                e_2 = _a.sent();
+                e_3 = _a.sent();
                 res.status(500).json({
-                    error: e_2
+                    error: e_3
                 });
                 return [3 /*break*/, 4];
             case 4: return [3 /*break*/, 6];
